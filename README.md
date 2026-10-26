@@ -13,10 +13,7 @@ Nomes com observação preenchida aparecem com um ponto ●.
 1. Em <https://vercel.com/new>, importe este repositório do GitHub e clique em **Deploy**.
 2. No projeto criado, abra **Storage → Create Database → Neon (Postgres)** e conecte ao projeto.
    O Vercel cria a variável `DATABASE_URL` automaticamente.
-3. Em **Settings → Environment Variables**, crie o login de acesso ao site:
-   - `APP_USUARIO` – usuário
-   - `APP_SENHA` – senha forte
-4. Em **Deployments**, clique em **Redeploy** para aplicar as variáveis.
+3. Em **Deployments**, clique em **Redeploy** para aplicar a conexão com o banco.
 
 A tabela `funcionarios_desligados` é criada automaticamente no primeiro acesso
 (estrutura em [`db/schema.sql`](db/schema.sql)). Se preferir, cole esse SQL no editor
@@ -33,6 +30,6 @@ npm run dev
 
 ## Atenção (LGPD)
 
-Os registros contêm dados pessoais e acusações sensíveis. Mantenha o site protegido
-por senha, compartilhe o acesso só com quem precisa e registre fatos objetivos na
+Os registros contêm dados pessoais e acusações sensíveis. O site não tem senha:
+qualquer pessoa com o link pode ver e editar. Compartilhe o link só com quem precisa e registre fatos objetivos na
 observação.
