@@ -98,3 +98,6 @@ th { font-size: 0.85rem; color: var(--suave); font-weight: 600; }
 .acoes { display: flex; gap: 8px; margin-top: 6px; }
 .acoes span { flex: 1; }
 .perigo { color: var(--perigo); border-color: var(--perigo); }
+.botoes { white-space: nowrap; }
+.botoes button { padding: 4px 10px; font-size: 0.85rem; }
+.botoes button + button { margin-left: 6px; }

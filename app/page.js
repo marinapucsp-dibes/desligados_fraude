@@ -69,6 +69,14 @@ export default function Pagina() {
     }
   }
 
+  function abrir(f) {
+    setAberto({
+      ...f,
+      unidade_atuacao: f.unidade_atuacao ?? "",
+      observacao: f.observacao ?? "",
+    });
+  }
+
   async function excluir(f) {
     if (!confirm(`Excluir o registro de ${f.nome}?`)) return;
     await enviar(`/api/funcionarios/${f.id}`, "DELETE");
@@ -80,7 +88,7 @@ export default function Pagina() {
   const filtrada = termo
     ? lista.filter((f) =>
         [f.nome, f.unidade_atuacao, f.tipo_desligamento].some((v) =>
-          v.toLowerCase().includes(termo)
+          (v ?? "").toLowerCase().includes(termo)
         )
       )
     : lista;
@@ -97,10 +105,9 @@ export default function Pagina() {
           required
         />
         <input
-          placeholder="Unidade de atuação"
+          placeholder="Unidade (opcional)"
           value={novo.unidade_atuacao}
           onChange={(e) => setNovo({ ...novo, unidade_atuacao: e.target.value })}
-          required
         />
         <input
           type="date"
@@ -145,6 +152,7 @@ export default function Pagina() {
               <th>Unidade de atuação</th>
               <th>Data do desligamento</th>
               <th>Tipo de desligamento</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -154,22 +162,26 @@ export default function Pagina() {
                   <button
                     className="link"
                     title="Abrir observação"
-                    onClick={() =>
-                      setAberto({ ...f, observacao: f.observacao ?? "" })
-                    }
+                    onClick={() => abrir(f)}
                   >
                     {f.nome}
                     {f.observacao && <span className="marca">●</span>}
                   </button>
                 </td>
-                <td>{f.unidade_atuacao}</td>
+                <td>{f.unidade_atuacao || "—"}</td>
                 <td>{formatarData(f.data_desligamento)}</td>
                 <td>{f.tipo_desligamento}</td>
+                <td className="botoes">
+                  <button onClick={() => abrir(f)}>Editar</button>
+                  <button className="perigo" onClick={() => excluir(f)}>
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))}
             {!filtrada.length && (
               <tr>
-                <td colSpan={4} className="vazio">
+                <td colSpan={5} className="vazio">
                   Nenhum registro.
                 </td>
               </tr>
@@ -201,7 +213,6 @@ export default function Pagina() {
                 onChange={(e) =>
                   setAberto({ ...aberto, unidade_atuacao: e.target.value })
                 }
-                required
               />
             </label>
             <label>
