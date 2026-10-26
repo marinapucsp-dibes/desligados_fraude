@@ -1,0 +1,100 @@
+:root {
+  --fundo: #f6f7f9;
+  --cartao: #fff;
+  --texto: #1d2330;
+  --suave: #6b7280;
+  --borda: #d9dde3;
+  --destaque: #1f5fbf;
+  --perigo: #b42318;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #14171c;
+    --cartao: #1d2128;
+    --texto: #e7e9ee;
+    --suave: #9aa2ae;
+    --borda: #343a44;
+    --destaque: #6aa1ff;
+    --perigo: #ff7b6e;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { max-width: 1000px; margin: 0 auto; padding: 24px 16px; }
+h1 { font-size: 1.4rem; margin: 0 0 20px; }
+h2 { font-size: 1.15rem; margin: 0 0 8px; }
+input, select, textarea, button {
+  font: inherit;
+  color: inherit;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+textarea { resize: vertical; min-height: 40px; }
+button { cursor: pointer; }
+button[type="submit"] {
+  background: var(--destaque);
+  border-color: var(--destaque);
+  color: #fff;
+}
+.novo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 12px;
+}
+.novo textarea { grid-column: 1 / -1; }
+.busca { width: 100%; margin: 16px 0 8px; }
+.erro { color: var(--perigo); }
+.tabela { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+}
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--borda); }
+th { font-size: 0.85rem; color: var(--suave); font-weight: 600; }
+.vazio { color: var(--suave); text-align: center; }
+.link {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--destaque);
+  text-decoration: underline;
+  text-align: left;
+}
+.marca { font-size: 0.6rem; margin-left: 6px; vertical-align: middle; }
+.fundo {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.45);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.caixa {
+  width: min(560px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--cartao);
+  border-radius: 10px;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+}
+.caixa label { display: grid; gap: 4px; font-size: 0.85rem; color: var(--suave); }
+.caixa label > * { color: var(--texto); font-size: 15px; }
+.acoes { display: flex; gap: 8px; margin-top: 6px; }
+.acoes span { flex: 1; }
+.perigo { color: var(--perigo); border-color: var(--perigo); }
